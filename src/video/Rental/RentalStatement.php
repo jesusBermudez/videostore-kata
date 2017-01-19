@@ -1,6 +1,6 @@
 <?php
 
-namespace video;
+namespace video\Rental;
 
 /**
  * Class RentalStatement
@@ -96,7 +96,7 @@ class RentalStatement
      */
     private function formatRentalLine($rental, $thisAmount) : string
     {
-        return "\t" . $rental->title() . "\t" . $thisAmount . "\n";
+        return "\t" . $rental->title() . "\t" . number_format($thisAmount, 1) . "\n";
     }
 
     /**

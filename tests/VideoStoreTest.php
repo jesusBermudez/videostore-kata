@@ -3,12 +3,12 @@
 namespace tests;
 
 use PHPUnit_Framework_TestCase;
-use video\ChildrensMovie;
-use video\Movie;
-use video\NewReleaseMovie;
-use video\RegularMovie;
-use video\Rental;
-use video\RentalStatement;
+use video\MovieTypes\ChildrensMovie;
+use video\MovieTypes\Movie;
+use video\MovieTypes\NewReleaseMovie;
+use video\MovieTypes\RegularMovie;
+use video\Rental\Rental;
+use video\Rental\RentalStatement;
 
 
 /**

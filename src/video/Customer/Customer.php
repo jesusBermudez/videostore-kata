@@ -1,6 +1,7 @@
 <?php
 
-namespace video;
+namespace video\Customer;
+use video\Rental\Rental;
 
 /**
  * Class Customer

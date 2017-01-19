@@ -1,6 +1,8 @@
 <?php
 
-namespace video;
+namespace video\Rental;
+
+use video\MovieTypes\Movie;
 
 /**
  * Class Rental

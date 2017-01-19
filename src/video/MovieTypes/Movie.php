@@ -28,7 +28,4 @@ abstract class Movie
         return $this->title;
     }
 
-    abstract public function determineAmount($daysRented) : float;
-
-    abstract public function determineFrequentRenterPoints($daysRented) : int;
 }

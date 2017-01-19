@@ -16,27 +16,27 @@ class RegularMovie extends Movie
         parent::__construct($title);
     }
 
-    /**
-     * @param $daysRented
-     * @return float
-     */
-    public function determineAmount($daysRented) : float
-    {
-        $thisAmount = 2;
+//    /**
+//     * @param $daysRented
+//     * @return float
+//     */
+//    public function determineAmount($daysRented) : float
+//    {
+//        $thisAmount = 2;
+//
+//        if ($daysRented > 2) {
+//            $thisAmount += ($daysRented - 2) * 1.5;
+//        }
+//
+//        return $thisAmount;
+//    }
 
-        if ($daysRented > 2) {
-            $thisAmount += ($daysRented - 2) * 1.5;
-        }
-
-        return $thisAmount;
-    }
-
-    /**
-     * @param $daysRented
-     * @return int
-     */
-    public function determineFrequentRenterPoints($daysRented) : int
-    {
-        return 1;
-    }
+//    /**
+//     * @param $daysRented
+//     * @return int
+//     */
+//    public function determineFrequentRenterPoints($daysRented) : int
+//    {
+//        return 1;
+//    }
 }

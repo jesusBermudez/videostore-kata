@@ -1,7 +1,7 @@
 <?php
 
 
-namespace tests;
+namespace tests\Unit\Movie;
 
 
 use PHPUnit_Framework_TestCase;

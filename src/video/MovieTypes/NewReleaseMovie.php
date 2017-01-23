@@ -16,4 +16,12 @@ class NewReleaseMovie extends Movie
         parent::__construct($title);
     }
 
+    /**
+     * @return string
+     */
+    public function priceCode()
+    {
+        return self::NEW_RELEASE;
+    }
+
 }

@@ -7,6 +7,8 @@ namespace video\MovieTypes;
  */
 class ChildrensMovie extends Movie
 {
+
+
     /**
      * ChildrensMovie constructor.
      * @param $title
@@ -14,6 +16,14 @@ class ChildrensMovie extends Movie
     public function __construct($title)
     {
         parent::__construct($title);
+    }
+
+    /**
+     * @return string
+     */
+    public function priceCode()
+    {
+        return self::CHILDRENS;
     }
 
 

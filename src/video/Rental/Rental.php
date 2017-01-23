@@ -43,16 +43,16 @@ class Rental
      */
     public function determineAmount() : float
     {
-        $typeMovie = get_class($this->movie);
-        switch ($typeMovie)
+
+        switch ($this->movie()->priceCode())
         {
-            case 'video\MovieTypes\ChildrensMovie':
+            case Movie::CHILDRENS:
                 return $this->determineAmountChildrensMovie($this->daysRented);
                 break;
-            case 'video\MovieTypes\NewReleaseMovie':
+            case Movie::NEW_RELEASE:
                 return $this->determineAmountNewRelease($this->daysRented);
                 break;
-            case 'video\MovieTypes\RegularMovie':
+            case Movie::REGULAR:
                 return $this->determineAmountRegularMovie($this->daysRented);
                 break;
             default:
@@ -63,8 +63,7 @@ class Rental
 
     public function determineFrequentRenterPoints()
     {
-        $typeMovie = get_class($this->movie);
-        if ($typeMovie == 'video\MovieTypes\NewReleaseMovie') {
+        if (Movie::NEW_RELEASE == $this->movie()->priceCode()) {
             return $this->determineFrequentRenterPointsNewReleaseMovie($this->daysRented);
         } else {
             return 1;
@@ -118,6 +117,14 @@ class Rental
     public function determineFrequentRenterPointsNewReleaseMovie($daysRented) : int
     {
         return ($daysRented > 1) ? 2 : 1;
+    }
+
+    /**
+     * @return Movie
+     */
+    public function movie()
+    {
+        return $this->movie;
     }
 
 }

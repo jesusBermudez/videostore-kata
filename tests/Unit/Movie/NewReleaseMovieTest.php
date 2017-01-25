@@ -53,7 +53,7 @@ class NewReleaseMovieTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(3, $this->rental2->determineAmount());
     }
 
-    public function testSingleChildrensMoviePoints()
+    public function testSingleNewReleaseMoviePoints()
     {
         $this->assertEquals(2, $this->rental1->determineFrequentRenterPoints());
         $this->assertEquals(1, $this->rental2->determineFrequentRenterPoints());

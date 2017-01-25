@@ -10,10 +10,6 @@ abstract class Movie
     /** @var  string */
     private $title;
 
-    const REGULAR = 0;
-    const NEW_RELEASE = 1;
-    const CHILDRENS = 2;
-
     /**
      * Movie constructor.
      * @param $title
@@ -31,12 +27,6 @@ abstract class Movie
     {
         return $this->title;
     }
-
-
-    /**
-     * @return string
-     */
-    abstract public function priceCode();
 
 
 }

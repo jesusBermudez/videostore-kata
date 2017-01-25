@@ -4,6 +4,12 @@ namespace video\Rental;
 
 use Exception;
 use video\MovieTypes\Movie;
+use video\Strategy\AmountStrategy\AmountForAMovieTimeStrategy;
+use video\Strategy\AmountStrategy\AmountMovieStrategy;
+use video\Strategy\AmountStrategy\AmountPerDayPerMovieStrategy;
+use video\Strategy\PointsStrategy\PointsForAMovieTimeStrategy;
+use video\Strategy\PointsStrategy\PointsMovieStrategy;
+use video\Strategy\PointsStrategy\PointsPerDayPerMovieStrategy;
 
 /**
  * Class Rental
@@ -16,6 +22,20 @@ class Rental
     /** @var  int */
     private $daysRented;
 
+    private $parameters;
+
+    /** @var AmountMovieStrategy  */
+    private $amountStrategy = [];
+
+    /** @var  PointsMovieStrategy */
+    private $pointsStrategy = [];
+
+    /** @var AmountMovieStrategy  */
+    private $amountCalculate;
+
+    /** @var  PointsMovieStrategy */
+    private $pointsCalculate;
+
     /**
      * Rental constructor.
      * @param Movie $movie
@@ -25,6 +45,20 @@ class Rental
     {
         $this->movie = $movie;
         $this->daysRented = $daysRented;
+        $this->parameters = yaml_parse_file('/Users/jesus.bermudez/Documents/repo_formacion/video-store-kata/videostore-kata/templatemovie.yml');
+        $this->createContext();
+        $this->setStrategy();
+
+    }
+
+    /**
+     * @throws Exception
+     */
+    private function setStrategy()
+    {
+        $typeMovie = implode('', array_slice(explode('\\', get_class($this->movie())), -1));
+        $this->amountCalculate = $this->amountStrategy[$typeMovie];
+        $this->pointsCalculate = $this->pointsStrategy[$typeMovie];
     }
 
     /**
@@ -43,80 +77,15 @@ class Rental
      */
     public function determineAmount() : float
     {
-
-        switch ($this->movie()->priceCode())
-        {
-            case Movie::CHILDRENS:
-                return $this->determineAmountChildrensMovie($this->daysRented);
-                break;
-            case Movie::NEW_RELEASE:
-                return $this->determineAmountNewRelease($this->daysRented);
-                break;
-            case Movie::REGULAR:
-                return $this->determineAmountRegularMovie($this->daysRented);
-                break;
-            default:
-                throw new Exception('Type movie not exist');
-
-        }
-    }
-
-    public function determineFrequentRenterPoints()
-    {
-        if (Movie::NEW_RELEASE == $this->movie()->priceCode()) {
-            return $this->determineFrequentRenterPointsNewReleaseMovie($this->daysRented);
-        } else {
-            return 1;
-        }
-    }
-
-
-    /**
-     * @param $daysRented
-     * @return float
-     */
-    private function determineAmountChildrensMovie($daysRented) : float
-    {
-        $thisAmount = 1.5;
-
-        if ($daysRented > 3) {
-            $thisAmount += ($daysRented - 3) * 1.5;
-        }
-
-        return $thisAmount;
+        return $this->amountCalculate->calculateAmount($this->daysRented);
     }
 
     /**
-     * @param $daysRented
-     * @return float
-     */
-    private function determineAmountNewRelease($daysRented) : float
-    {
-        return $daysRented * 3.0;
-    }
-
-    /**
-     * @param $daysRented
-     * @return float
-     */
-    private function determineAmountRegularMovie($daysRented) : float
-    {
-        $thisAmount = 2;
-
-        if ($daysRented > 2) {
-            $thisAmount += ($daysRented - 2) * 1.5;
-        }
-
-        return $thisAmount;
-    }
-
-    /**
-     * @param $daysRented
      * @return int
      */
-    public function determineFrequentRenterPointsNewReleaseMovie($daysRented) : int
+    public function determineFrequentRenterPoints() : int
     {
-        return ($daysRented > 1) ? 2 : 1;
+       return $this->pointsCalculate->calculatePoints($this->daysRented);
     }
 
     /**
@@ -125,6 +94,25 @@ class Rental
     public function movie()
     {
         return $this->movie;
+    }
+
+    /**
+     * @internal param float $amount
+     * @internal param int $days
+     */
+    private function createContext()
+    {
+        $this->amountStrategy = array(
+            'ChildrensMovie' => new AmountForAMovieTimeStrategy($this->parameters['ChildrensMovie']['Amount'], $this->parameters['ChildrensMovie']['DaysAmount'], $this->parameters['ChildrensMovie']['Value']),
+            'RegularMovie' => new AmountForAMovieTimeStrategy($this->parameters['RegularMovie']['Amount'], $this->parameters['RegularMovie']['DaysAmount'], $this->parameters['ChildrensMovie']['Value']),
+            'NewReleaseMovie' => new AmountPerDayPerMovieStrategy($this->parameters['NewReleaseMovie']['Amount'])
+        );
+
+        $this->pointsStrategy = array(
+            'ChildrensMovie' => new PointsPerDayPerMovieStrategy(),
+            'RegularMovie' => new PointsPerDayPerMovieStrategy(),
+            'NewReleaseMovie' => new PointsForAMovieTimeStrategy($this->parameters['NewReleaseMovie']['DaysPoints'])
+        );
     }
 
 }

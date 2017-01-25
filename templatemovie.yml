@@ -1,0 +1,22 @@
+ChildrensMovie:
+  Amount: 1.5
+  DaysAmount: 3
+  Value: 1.5
+  DaysPoints: 0
+RegularMovie:
+  Amount: 2.0
+  DaysAmount: 2
+  Value: 1.5
+  DaysPoints: 0
+NewReleaseMovie:
+  Amount: 3.0
+  DaysAmount: 2
+  Value: 1.5
+  DaysPoints: 1
+
+
+
+
+
+
+

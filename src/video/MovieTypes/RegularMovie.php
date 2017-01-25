@@ -15,12 +15,4 @@ class RegularMovie extends Movie
     {
         parent::__construct($title);
     }
-
-    /**
-     * @return string
-     */
-    public function priceCode()
-    {
-        return self::REGULAR;
-    }
 }

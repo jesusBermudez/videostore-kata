@@ -3,13 +3,13 @@
 namespace video\Rental;
 
 use Exception;
+use video\AmountRentalCalculator\AmountForAMovieTimeStrategy;
+use video\AmountRentalCalculator\AmountMovieStrategy;
+use video\AmountRentalCalculator\AmountPerDayPerMovieStrategy;
 use video\MovieTypes\Movie;
-use video\Strategy\AmountStrategy\AmountForAMovieTimeStrategy;
-use video\Strategy\AmountStrategy\AmountMovieStrategy;
-use video\Strategy\AmountStrategy\AmountPerDayPerMovieStrategy;
-use video\Strategy\PointsStrategy\PointsForAMovieTimeStrategy;
-use video\Strategy\PointsStrategy\PointsMovieStrategy;
-use video\Strategy\PointsStrategy\PointsPerDayPerMovieStrategy;
+use video\PointsRentalCalculator\PointsForAMovieTimeStrategy;
+use video\PointsRentalCalculator\PointsMovieStrategy;
+use video\PointsRentalCalculator\PointsPerDayPerMovieStrategy;
 
 /**
  * Class Rental

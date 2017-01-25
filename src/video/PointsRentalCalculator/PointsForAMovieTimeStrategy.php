@@ -1,5 +1,5 @@
 <?php
-namespace video\Strategy\PointsStrategy;
+namespace video\PointsRentalCalculator;
 
 
 class PointsForAMovieTimeStrategy implements PointsMovieStrategy

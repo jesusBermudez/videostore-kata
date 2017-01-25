@@ -1,5 +1,5 @@
 <?php
-namespace video\Strategy\AmountStrategy;
+namespace video\AmountRentalCalculator;
 
 interface AmountMovieStrategy
 {

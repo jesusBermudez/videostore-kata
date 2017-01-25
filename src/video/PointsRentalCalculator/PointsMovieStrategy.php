@@ -1,6 +1,6 @@
 <?php
 
-namespace video\Strategy\PointsStrategy;
+namespace video\PointsRentalCalculator;
 
 
 interface PointsMovieStrategy

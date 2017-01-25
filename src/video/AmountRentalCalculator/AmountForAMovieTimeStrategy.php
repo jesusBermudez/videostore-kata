@@ -1,6 +1,6 @@
 <?php
 
-namespace video\Strategy\AmountStrategy;
+namespace video\AmountRentalCalculator;
 
 
 class AmountForAMovieTimeStrategy implements AmountMovieStrategy

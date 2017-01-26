@@ -7,7 +7,7 @@ php:
 
 install:
   - sudo apt-get install php-pear libyaml-dev
-  - sudo pecl install yaml
+  - sudo pecl install yaml -y
 
 # Commands to be run before your environment runs.
 before_script:

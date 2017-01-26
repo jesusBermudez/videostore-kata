@@ -45,7 +45,7 @@ class Rental
     {
         $this->movie = $movie;
         $this->daysRented = $daysRented;
-        $this->parameters = yaml_parse_file('/Users/jesus.bermudez/Documents/repo_formacion/video-store-kata/videostore-kata/templatemovie.yml');
+        $this->parameters = yaml_parse_file('templatemovie.yml');
         $this->createContext();
         $this->setStrategy();
 

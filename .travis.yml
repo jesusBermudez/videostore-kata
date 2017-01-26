@@ -6,8 +6,8 @@ php:
   - 7.0
 
 install:
-  - sudo apt-get install php-pear libyaml-dev
-  - printf "\n" | sudo pecl install yaml
+  - apt-get install php-pear libyaml-dev
+  - printf "\n" | pecl install yaml
 
 # Commands to be run before your environment runs.
 before_script:

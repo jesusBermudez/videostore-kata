@@ -3,6 +3,7 @@
 namespace video\Rental;
 
 use Exception;
+use Symfony\Component\Yaml\Yaml;
 use video\AmountRentalCalculator\AmountForAMovieTimeStrategy;
 use video\AmountRentalCalculator\AmountMovieStrategy;
 use video\AmountRentalCalculator\AmountPerDayPerMovieStrategy;
@@ -45,7 +46,7 @@ class Rental
     {
         $this->movie = $movie;
         $this->daysRented = $daysRented;
-        $this->parameters = yaml_parse_file('templatemovie.yml');
+        $this->parameters = Yaml::parse(file_get_contents('templatemovie.yml'));
         $this->createContext();
         $this->setStrategy();
 

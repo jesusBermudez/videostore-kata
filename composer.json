@@ -11,6 +11,7 @@
   ],
   "autoload": {
     "psr-4": {
+      "Store\\": "features/bootstrap/src",
       "": "src/"
     }
   },
@@ -26,6 +27,8 @@
   },
   "require": {
     "php": ">=7.0.0",
-    "symfony/yaml": "^3.2"
+    "symfony/yaml": "^3.2",
+    "behat/behat": "3.2.0",
+    "behat/gherkin": "4.4.4"
   }
 }

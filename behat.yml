@@ -1,0 +1,9 @@
+default:
+  autoload:
+    'src': %paths.base%/features/bootstrap/src
+  suites:
+    videostore:
+      paths: [ %paths.base%/features/videoStore ]
+      contexts:
+        - Store\MovieContext
+        - Store\CustomerContext

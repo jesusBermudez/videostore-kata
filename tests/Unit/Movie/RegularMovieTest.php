@@ -5,6 +5,7 @@ namespace tests\Unit\Movie;
 
 use PHPUnit_Framework_TestCase;
 use video\MovieTypes\Movie;
+use video\MovieTypes\MovieCategory;
 use video\MovieTypes\RegularMovie;
 use video\Rental\Rental;
 
@@ -20,13 +21,16 @@ class RegularMovieTest extends PHPUnit_Framework_TestCase
     /** @var Rental */
     private $rental2;
 
+    private $category;
+
     /**
      * Test set up.
      */
     protected function setUp()
     {
-        $this->regular1 = new RegularMovie('Regular Movie 1');
-        $this->regular2 = new RegularMovie('Regular Movie 2');
+        $this->category = new MovieCategory(2, 'Regular');
+        $this->regular1 = new Movie('Regular Movie 1', $this->category);
+        $this->regular2 = new Movie('Regular Movie 2', $this->category);
         $this->rental1 = new Rental($this->regular1, 3);
         $this->rental2 = new Rental($this->regular2, 1);
     }

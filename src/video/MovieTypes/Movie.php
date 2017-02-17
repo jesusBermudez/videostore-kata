@@ -5,18 +5,23 @@ namespace video\MovieTypes;
 /**
  * Class Movie
  */
-abstract class Movie
+class Movie
 {
     /** @var  string */
     private $title;
 
+    /** @var  MovieCategory */
+    private $category;
+
     /**
      * Movie constructor.
-     * @param $title
+     * @param string $title
+     * @param  MovieCategory $category
      */
-    public function __construct($title)
+    public function __construct($title, $category)
     {
         $this->title = $title;
+        $this->category = $category;
     }
 
     /**
@@ -26,6 +31,14 @@ abstract class Movie
     public function title() : string
     {
         return $this->title;
+    }
+
+    /**
+     * @return MovieCategory
+     */
+    public function category() : MovieCategory
+    {
+        return $this->category;
     }
 
 

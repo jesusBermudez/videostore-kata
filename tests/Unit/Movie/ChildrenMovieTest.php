@@ -5,8 +5,8 @@ namespace tests\Unit\Movie;
 
 
 use PHPUnit_Framework_TestCase;
-use video\MovieTypes\ChildrensMovie;
 use video\MovieTypes\Movie;
+use video\MovieTypes\MovieCategory;
 use video\Rental\Rental;
 
 class ChildrenMovieTest extends PHPUnit_Framework_TestCase
@@ -20,6 +20,8 @@ class ChildrenMovieTest extends PHPUnit_Framework_TestCase
     private $rental1;
     /** @var Rental */
     private $rental2;
+    /** @var  MovieCategory */
+    private $category;
 
 
     /**
@@ -27,8 +29,9 @@ class ChildrenMovieTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->children1 = new ChildrensMovie('Children1');
-        $this->children2 = new ChildrensMovie('Children2');
+        $this->category = new MovieCategory(1, 'Children');
+        $this->children1 = new Movie('Children1', $this->category);
+        $this->children2 = new Movie('Children2', $this->category);
         $this->rental1 = new Rental($this->children1, 4);
         $this->rental2 = new Rental($this->children2, 2);
 
@@ -39,6 +42,7 @@ class ChildrenMovieTest extends PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
+        $this->category = null;
         $this->children1 = null;
         $this->children2 = null;
         $this->rental1 = null;

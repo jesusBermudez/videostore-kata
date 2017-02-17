@@ -57,7 +57,8 @@ class Rental
      */
     private function setStrategy()
     {
-        $typeMovie = implode('', array_slice(explode('\\', get_class($this->movie())), -1));
+        $category = $this->movie->category();
+        $typeMovie = $category->getDescription();
         $this->amountCalculate = $this->amountStrategy[$typeMovie];
         $this->pointsCalculate = $this->pointsStrategy[$typeMovie];
     }
@@ -104,15 +105,15 @@ class Rental
     private function createContext()
     {
         $this->amountStrategy = array(
-            'ChildrensMovie' => new AmountForAMovieTimeStrategy($this->parameters['ChildrensMovie']['Amount'], $this->parameters['ChildrensMovie']['DaysAmount'], $this->parameters['ChildrensMovie']['Value']),
-            'RegularMovie' => new AmountForAMovieTimeStrategy($this->parameters['RegularMovie']['Amount'], $this->parameters['RegularMovie']['DaysAmount'], $this->parameters['ChildrensMovie']['Value']),
-            'NewReleaseMovie' => new AmountPerDayPerMovieStrategy($this->parameters['NewReleaseMovie']['Amount'])
+            'Children' => new AmountForAMovieTimeStrategy($this->parameters['ChildrensMovie']['Amount'], $this->parameters['ChildrensMovie']['DaysAmount'], $this->parameters['ChildrensMovie']['Value']),
+            'Regular' => new AmountForAMovieTimeStrategy($this->parameters['RegularMovie']['Amount'], $this->parameters['RegularMovie']['DaysAmount'], $this->parameters['ChildrensMovie']['Value']),
+            'New release' => new AmountPerDayPerMovieStrategy($this->parameters['NewReleaseMovie']['Amount'])
         );
 
         $this->pointsStrategy = array(
-            'ChildrensMovie' => new PointsPerDayPerMovieStrategy(),
-            'RegularMovie' => new PointsPerDayPerMovieStrategy(),
-            'NewReleaseMovie' => new PointsForAMovieTimeStrategy($this->parameters['NewReleaseMovie']['DaysPoints'])
+            'Children' => new PointsPerDayPerMovieStrategy(),
+            'Regular' => new PointsPerDayPerMovieStrategy(),
+            'New release' => new PointsForAMovieTimeStrategy($this->parameters['NewReleaseMovie']['DaysPoints'])
         );
     }
 

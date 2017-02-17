@@ -5,6 +5,7 @@ namespace tests;
 use PHPUnit_Framework_TestCase;
 use video\MovieTypes\ChildrensMovie;
 use video\MovieTypes\Movie;
+use video\MovieTypes\MovieCategory;
 use video\MovieTypes\NewReleaseMovie;
 use video\MovieTypes\RegularMovie;
 use video\Rental\Rental;
@@ -30,19 +31,28 @@ class VideoStoreTest extends PHPUnit_Framework_TestCase
     private $regular2;
     /** @var  Movie */
     private $regular3;
+    /** @var  MovieCategory */
+    private $category1;
+    /** @var  MovieCategory */
+    private $category2;
+    /** @var  MovieCategory */
+    private $category3;
 
     /**
      * Test set up.
      */
     protected function setUp()
     {
+        $this->category1 = new MovieCategory(1, 'Children');
+        $this->category2 = new MovieCategory(2, 'Regular');
+        $this->category3 = new MovieCategory(3, 'New release');
         $this->statement = new RentalStatement('Customer Name');
-        $this->newRelease1 = new NewReleaseMovie('New Release 1');
-        $this->newRelease2 = new NewReleaseMovie('New Release 2');
-        $this->childrens = new ChildrensMovie('Childrens');
-        $this->regular1 = new RegularMovie('Regular 1');
-        $this->regular2 = new RegularMovie('Regular 2');
-        $this->regular3 = new RegularMovie('Regular 3');
+        $this->newRelease1 = new Movie('New Release 1', $this->category3);
+        $this->newRelease2 = new Movie('New Release 2' ,$this->category3);
+        $this->childrens = new Movie('Childrens', $this->category1);
+        $this->regular1 = new Movie('Regular 1', $this->category2);
+        $this->regular2 = new Movie('Regular 2', $this->category2);
+        $this->regular3 = new Movie('Regular 3', $this->category2);
     }
 
     /**
@@ -50,6 +60,9 @@ class VideoStoreTest extends PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
+        $this->category1 = null;
+        $this->category2 = null;
+        $this->category3 = null;
         $this->statement = null;
         $this->newRelease1 = null;
         $this->newRelease2 = null;

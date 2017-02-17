@@ -4,6 +4,7 @@ namespace tests\unit\Customer;
 use video\Customer\Customer;
 use video\MovieTypes\ChildrensMovie;
 use video\MovieTypes\Movie;
+use video\MovieTypes\MovieCategory;
 use video\MovieTypes\NewReleaseMovie;
 use video\MovieTypes\RegularMovie;
 use video\Rental\Rental;
@@ -35,18 +36,28 @@ class CustomerTest extends PHPUnit_Framework_TestCase
     private $rental4;
     /** @var Rental */
     private $rental5;
+    /** @var  MovieCategory */
+    private $category1;
+    /** @var  MovieCategory */
+    private $category2;
+    /** @var  MovieCategory */
+    private $category3;
+
 
     /**
      * Test set up.
      */
     protected function setUp()
     {
+        $this->category1 = new MovieCategory(1, 'Children');
+        $this->category2 = new MovieCategory(2, 'Regular');
+        $this->category3 = new MovieCategory(3, 'New release');
         $this->customer = new Customer('Customer Name');
-        $this->children1 = new ChildrensMovie('Children Movie 1');
-        $this->regular1 = new RegularMovie('Regular movie 1');
-        $this->children2 = new ChildrensMovie('Children Movie 2');
-        $this->regular2 = new RegularMovie('Regular movie 2');
-        $this->newRelease = new NewReleaseMovie('New release movie');
+        $this->children1 = new Movie('Children Movie 1', $this->category1);
+        $this->regular1 = new Movie('Regular movie 1', $this->category2);
+        $this->children2 = new Movie('Children Movie 2', $this->category1);
+        $this->regular2 = new Movie('Regular movie 2', $this->category2);
+        $this->newRelease = new Movie('New release movie', $this->category3);
         $this->rental1 = new Rental($this->children1, 4);
         $this->rental2 = new Rental($this->children2, 2);
         $this->rental3 = new Rental($this->regular1, 5);
@@ -59,6 +70,9 @@ class CustomerTest extends PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
+        $this->category1 = null;
+        $this->category2 = null;
+        $this->category3 = null;
         $this->children1 = null;
         $this->children2 = null;
         $this->regular1 = null;
